@@ -1,2 +1,2 @@
 # M365CodelessConnector
-Sentinel Codeless Connector to connect to an external M365 Tenant. 
+Sentinel Codeless Connector to connect to an external M365 Tenant. This connector will allow users to connect to an M365 tenant outside of the tenant that Sentinel resides.  When using ASIM for analytics rules and advanced hunting rules, this connector will allow for alerting and hunting exactly the same way as the native connectors/schemes.  In theory, this will also allow for users to connect to different compliance tenants (e.g. GCC and GCC-H).
