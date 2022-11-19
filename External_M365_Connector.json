@@ -95,27 +95,20 @@
               ]
             },
             "instructionSteps": [
-              {
-                "title": "Connect External M365 tenant to Microsoft Sentinel",
-                "description": "Provide TenantID, ClientID and Secret",
-                "instructions": [
-                  {
-                    "parameters": {
-                      "enable": "true",
-                      "userRequestPlaceHoldersInput": [
+                {
+                    "title": "External M365 to Azure Sentinel",
+                    "description": "Enter Oauth2 app credentials. \n",
+                    "instructions": [
                         {
-                          "displayText": "Tenant Id",
-                          "tokenEndpoint": "authorizationEndpoint",
-                          "placeHolderName": "{{tenantPlaceHolder}}"
+                            "parameters": {
+                                "enable": "true"
+                            },
+                            "type": "OAuth2"
                         }
-                      ]
-                    },
-                    "type": "OAuth2"
-                  }
-                ]
-              }
+                    ]
+                }
             ]
-          },
+        },
         "pollingConfig": {
             "auth": {
                 "authType": "OAuth2",
