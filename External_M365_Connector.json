@@ -36,7 +36,7 @@
     "kind": "APIPolling",
     "properties": {
         "connectorUiConfig": {
-            "title": "M365 External Tenan(Polling CCP)",
+            "title": "M365 External Tenant(Polling CCP)",
             "id":"M365_External",
             "publisher": "Ken Ward",
             "descriptionMarkdown": "<TBD>",
@@ -51,7 +51,7 @@
             "sampleQueries": [
               {
                 "description": "TBD",
-                "query": "{{graphQueriesTableName}}\n | where Action_s == \"Move to Shared Folder\"\n | extend AccountCustomEntity = Username_s, IPCustomEntity = IP_Address_s, URLCustomEntity = Data_s, TimestampCustomEntity = todatetime(Time_s) "
+                "query": "{{graphQueriesTableName}}\n | take 10"
               }
             ],
             "dataTypes": [
@@ -85,12 +85,6 @@
                     "read": true,
                     "delete": true
                   }
-                }
-              ],
-              "customs": [
-                {
-                  "name": "LastPass API Key and CID",
-                  "description": "A LastPass API key and CID are required. [See the documentation to learn more about LastPass API](https://support.logmeininc.com/lastpass/help/use-the-lastpass-provisioning-api-lp010068)."
                 }
               ]
             },
