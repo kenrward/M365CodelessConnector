@@ -36,23 +36,97 @@
     "kind": "APIPolling",
     "properties": {
         "connectorUiConfig": {
-        },
+            "title": "M365 External Tenan(Polling CCP)",
+            "id":"M365_External",
+            "publisher": "Ken Ward",
+            "descriptionMarkdown": "<TBD>",
+            "graphQueriesTableName": "M365_AdvHunting_CL",
+            "graphQueries": [
+              {
+                "metricName": "Total data received",
+                "legend": "M365 Adv Hunting Events",
+                "baseQuery": "{{graphQueriesTableName}}"
+              }
+            ],
+            "sampleQueries": [
+              {
+                "description": "TBD",
+                "query": "{{graphQueriesTableName}}\n | where Action_s == \"Move to Shared Folder\"\n | extend AccountCustomEntity = Username_s, IPCustomEntity = IP_Address_s, URLCustomEntity = Data_s, TimestampCustomEntity = todatetime(Time_s) "
+              }
+            ],
+            "dataTypes": [
+              {
+                "name": "{{graphQueriesTableName}}",
+                "lastDataReceivedQuery": "{{graphQueriesTableName}}\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+              }
+            ],
+            "connectivityCriteria": [
+              {
+                "type": "SentinelKindsV2",
+                "value": [
+                  "APIPolling"
+                ]
+              }
+            ],
+            "availability": {
+              "status": 1,
+              "isPreview": false
+            },
+            "permissions": {
+              "resourceProvider": [
+                {
+                  "provider": "Microsoft.OperationalInsights/workspaces",
+                  "permissionsDisplayText": "read and write permissions are required.",
+                  "providerDisplayName": "Workspace",
+                  "scope": "Workspace",
+                  "requiredPermissions": {
+                    "action": true,
+                    "write": true,
+                    "read": true,
+                    "delete": true
+                  }
+                }
+              ],
+              "customs": [
+                {
+                  "name": "LastPass API Key and CID",
+                  "description": "A LastPass API key and CID are required. [See the documentation to learn more about LastPass API](https://support.logmeininc.com/lastpass/help/use-the-lastpass-provisioning-api-lp010068)."
+                }
+              ]
+            },
+            "instructionSteps": [
+              {
+                "title": "Connect External M365 tenant to Microsoft Sentinel",
+                "description": "Provide TenantID, ClientID and Secret",
+                "instructions": [
+                  {
+                    "parameters": {
+                      "enable": "true",
+                      "userRequestPlaceHoldersInput": [
+                        {
+                          "displayText": "Tenant Id",
+                          "tokenEndpoint": "authorizationEndpoint",
+                          "placeHolderName": "{{tenantPlaceHolder}}"
+                        }
+                      ]
+                    },
+                    "type": "OAuth2"
+                  }
+                ]
+              }
+            ]
+          },
         "pollingConfig": {
             "auth": {
                 "authType": "OAuth2",
-                "authorizationEndpoint": "[concat('https://microsoftonline.com/',parameters('tenantId'), '/v2.0/authorize')]",
-                "redirectionEndpoint": "https://portal.azure.com/TokenAuthorize",
-                "tokenEndpoint": "[concat('https://login.windows.net/',parameters('tenantId'), '/oauth2/token')]",
-                "authorizationEndpointQueryParameters": {},
+                "tokenEndpoint": "https://login.microsoftonline.com/{{tenantPlaceHolder}}/oauth2/token",
                 "tokenEndpointHeaders": {
                     "Accept": "application/json"
                 },
-                "TokenEndpointQueryParameters": {},
                 "isClientSecretInHeader": false,
-                "scope": "AdvancedHunting.Read",
-                "grantType": "authorization_code",
-                "contentType": "application/x-www-form-urlencoded",
-                "FlowName": "AuthCode"
+                "grantType": "client_credentials",
+                "contentType": "application/json",
+                "FlowName": "ClientCredentials" 
             },
             "request": {
                 "apiEndpoint": "https://api.security.microsoft.com/api/advancedhunting/run",
@@ -62,7 +136,6 @@
                 "retryCount": 3,
                 "queryWindowInMin": 10,
                 "timeoutInSeconds": 120,
-                "queryParameters": {"Query":"DeviceProcessEvents | where InitiatingProcessFileName =~ \"powershell.exe\" | project Timestamp, FileName, InitiatingProcessFileName | order by Timestamp desc | limit 2"},
                 "isPostPayloadJson": true
               }
     }
