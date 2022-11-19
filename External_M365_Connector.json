@@ -9,13 +9,6 @@
                 "description": "Workspace name for Log Analytics where Microsoft Sentinel is setup"
             }
         },
-        "tenantId": {
-            "defaultValue": "<Enter Tenant Id>",
-            "type": "string",
-            "metadata": {
-                "description": "Tenant ID for M365"
-            }
-        },
         "connectorResourceName": {
             "type": "string",
             "defaultValue": "[newGuid()]",
@@ -106,14 +99,16 @@
         "pollingConfig": {
             "auth": {
                 "authType": "OAuth2",
-                "tokenEndpoint": "https://login.microsoftonline.com/{{tenantPlaceHolder}}/oauth2/token",
+                "tokenEndpoint": "https://login.microsoftonline.com/common/oauth2/token",
+                "authorizationEndpoint":"https://login.microsoftonline.com/organizations/oauth2/v2.0/authorize?",
                 "tokenEndpointHeaders": {
                     "Accept": "application/json"
                 },
                 "isClientSecretInHeader": false,
-                "grantType": "client_credentials",
+                "grantType": "authorization_code",
                 "contentType": "application/json",
-                "FlowName": "ClientCredentials" 
+                "scope": "ThreatHunting.Read.All",
+                "FlowName": "AuthCode" 
             },
             "request": {
                 "apiEndpoint": "https://api.security.microsoft.com/api/advancedhunting/run",
