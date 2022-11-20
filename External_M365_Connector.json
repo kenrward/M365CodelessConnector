@@ -109,7 +109,7 @@
                 "grantType": "authorization_code",
                 "contentType": "application/json",
                 "scope": "ThreatHunting.Read.All",
-                "FlowName": "AuthCode" 
+                "FlowName": "ClientCredential" 
             },
             "request": {
                 "apiEndpoint": "https://api.security.microsoft.com/api/advancedhunting/run",
