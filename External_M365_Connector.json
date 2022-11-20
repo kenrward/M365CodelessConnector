@@ -101,7 +101,7 @@
                 "authType": "OAuth2",
                 "tokenEndpoint": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
                 "authorizationEndpoint":"https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-                "redirectionEndpoint": "https://ms.portal.azure.com/TokenAuthorize",
+                "redirectionEndpoint": "https://portal.azure.com/TokenAuthorize",
                 "tokenEndpointHeaders": {
                     "Accept": "application/json"
                 },
