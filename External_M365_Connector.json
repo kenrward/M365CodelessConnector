@@ -97,20 +97,22 @@
             ]
         },
         "pollingConfig": {
-            "auth": {
-                "authType": "OAuth2",
-                "tokenEndpoint": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
-                "authorizationEndpoint":"https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
-                "redirectionEndpoint": "https://portal.azure.com/TokenAuthorize",
-                "tokenEndpointHeaders": {
-                    "Accept": "application/x-www-form-urlencoded"
-                },
-                "isClientSecretInHeader": false,
-                "grantType": "authorization_code",
-                "contentType": "application/x-www-form-urlencoded",
-                "scope": "https://graph.microsoft.com/.default",
-                "FlowName": "AuthCode" 
-            },
+          "auth": {
+              "authType": "OAuth2",
+              "authorizationEndpoint": "https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&prompt=consent",
+              "redirectionEndpoint": "https://portal.azure.com/TokenAuthorize",
+              "tokenEndpoint": "https://oauth2.googleapis.com/token",
+              "authorizationEndpointQueryParameters": {},
+              "tokenEndpointHeaders": {
+                  "Accept": "application/json"
+              },
+              "TokenEndpointQueryParameters": {},
+              "isClientSecretInHeader": false,
+              "scope": "https://www.googleapis.com/auth/admin.reports.audit.readonly",
+              "grantType": "authorization_code",
+              "contentType": "application/x-www-form-urlencoded",
+              "FlowName": "AuthCode"
+          },
             "request": {
                 "apiEndpoint": "https://graph.microsoft.com/v1.0/me",
                 "rateLimitQPS": 2,
