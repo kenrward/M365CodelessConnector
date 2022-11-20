@@ -99,22 +99,22 @@
         "pollingConfig": {
           "auth": {
               "authType": "OAuth2",
-              "authorizationEndpoint": "https://accounts.google.com/o/oauth2/v2/auth?access_type=offline&prompt=consent",
+              "authorizationEndpoint": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
               "redirectionEndpoint": "https://portal.azure.com/TokenAuthorize",
-              "tokenEndpoint": "https://oauth2.googleapis.com/token",
+              "tokenEndpoint": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
               "authorizationEndpointQueryParameters": {},
               "tokenEndpointHeaders": {
                   "Accept": "application/json"
               },
               "TokenEndpointQueryParameters": {},
               "isClientSecretInHeader": false,
-              "scope": "https://www.googleapis.com/auth/admin.reports.audit.readonly",
+              "scope": "User.Read",
               "grantType": "authorization_code",
               "contentType": "application/x-www-form-urlencoded",
               "FlowName": "AuthCode"
           },
             "request": {
-                "apiEndpoint": "https://graph.microsoft.com/v1.0/me",
+                "apiEndpoint": "https://graph.microsoft.com/v1.0/users",
                 "rateLimitQPS": 2,
                 "httpMethod": "Get",
                 "queryTimeFormat": "yyyy-MM-ddTHH:mm:ssZ",
@@ -122,7 +122,12 @@
                 "queryWindowInMin": 10,
                 "timeoutInSeconds": 120,
                 "isPostPayloadJson": true
-              }
+              },
+              "response": {
+                "eventsJsonPaths": [
+                    "$.data"
+                ]
+            }
     }
 }
 }
