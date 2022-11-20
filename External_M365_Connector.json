@@ -106,7 +106,7 @@
                     "Accept": "application/json"
                 },
                 "isClientSecretInHeader": false,
-                "grantType": "authorization_code",
+                "grantType": "client_credentials",
                 "contentType": "application/json",
                 "scope": "ThreatHunting.Read.All",
                 "FlowName": "ClientCredential" 
