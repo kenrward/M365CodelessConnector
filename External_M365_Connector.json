@@ -108,7 +108,7 @@
                 "isClientSecretInHeader": false,
                 "grantType": "authorization_code",
                 "contentType": "application/x-www-form-urlencoded",
-                "scope": "User.Read.All",
+                "scope": "https://graph.microsoft.com/.default",
                 "FlowName": "AuthCode" 
             },
             "request": {
