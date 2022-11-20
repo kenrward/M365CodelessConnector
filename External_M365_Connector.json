@@ -108,7 +108,7 @@
                 "isClientSecretInHeader": false,
                 "grantType": "authorization_code",
                 "contentType": "application/x-www-form-urlencoded",
-                "scope": "https://api.security.microsoft.com/api/advancedhunting/ThreatHunting.Read.All",
+                "scope": "ThreatHunting.Read.All",
                 "FlowName": "AuthCode" 
             },
             "request": {
