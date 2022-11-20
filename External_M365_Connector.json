@@ -106,10 +106,10 @@
                     "Accept": "application/json"
                 },
                 "isClientSecretInHeader": false,
-                "grantType": "client_credentials",
-                "contentType": "application/json",
+                "grantType": "authorization_code",
+                "contentType": "application/x-www-form-urlencoded",
                 "scope": "ThreatHunting.Read.All",
-                "FlowName": "ClientCredential" 
+                "FlowName": "AuthCode" 
             },
             "request": {
                 "apiEndpoint": "https://api.security.microsoft.com/api/advancedhunting/run",
