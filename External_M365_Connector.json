@@ -108,13 +108,13 @@
                 "isClientSecretInHeader": false,
                 "grantType": "authorization_code",
                 "contentType": "application/x-www-form-urlencoded",
-                "scope": "ThreatHunting.Read.All",
+                "scope": "User.Read.All User.Read",
                 "FlowName": "AuthCode" 
             },
             "request": {
-                "apiEndpoint": "",
+                "apiEndpoint": "https://graph.microsoft.com/v1.0/me",
                 "rateLimitQPS": 2,
-                "httpMethod": "",
+                "httpMethod": "Get",
                 "queryTimeFormat": "yyyy-MM-ddTHH:mm:ssZ",
                 "retryCount": 3,
                 "queryWindowInMin": 10,
