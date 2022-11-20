@@ -29,7 +29,7 @@
     "kind": "APIPolling",
     "properties": {
         "connectorUiConfig": {
-            "title": "M365 External Tenant(Polling CCP)",
+            "title": "M365 External Tenant (Polling CCP)",
             "id":"M365_External",
             "publisher": "Ken Ward",
             "descriptionMarkdown": "<TBD>",
@@ -101,6 +101,7 @@
                 "authType": "OAuth2",
                 "tokenEndpoint": "https://login.microsoftonline.com/common/oauth2/token",
                 "authorizationEndpoint":"https://login.microsoftonline.com/organizations/oauth2/v2.0/authorize?",
+                "redirectionEndpoint": "https://ms.portal.azure.com/TokenAuthorize",
                 "tokenEndpointHeaders": {
                     "Accept": "application/json"
                 },
