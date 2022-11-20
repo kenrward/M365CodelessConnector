@@ -112,9 +112,9 @@
                 "FlowName": "AuthCode" 
             },
             "request": {
-                "apiEndpoint": "https://api.security.microsoft.com/api/advancedhunting/run",
+                "apiEndpoint": "",
                 "rateLimitQPS": 2,
-                "httpMethod": "Post",
+                "httpMethod": "",
                 "queryTimeFormat": "yyyy-MM-ddTHH:mm:ssZ",
                 "retryCount": 3,
                 "queryWindowInMin": 10,
