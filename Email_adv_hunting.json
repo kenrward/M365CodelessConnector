@@ -1,0 +1,137 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "logAnalyticsWorkspaceName": {
+            "defaultValue": "<Enter Log Analytics Workspace name>",
+            "type": "string",
+            "metadata": {
+                "description": "Workspace name for Log Analytics where Microsoft Sentinel is setup"
+            }
+        },
+        "connectorResourceName": {
+            "type": "string",
+            "defaultValue": "[newGuid()]",
+            "metadata": {
+                "description": "Resource name for connector"
+            }
+        }
+    },
+    "functions": [],
+    "variables": {},
+    "resources": [
+{
+    "type": "Microsoft.OperationalInsights/workspaces/providers/dataConnectors",
+    "name": "[concat(parameters('logAnalyticsWorkspaceName'),'/Microsoft.SecurityInsights/', parameters('connectorResourceName'))]",
+    "apiVersion": "2021-03-01-preview",
+    "location": "[resourceGroup().location]",
+    "dependsOn": [],
+    "kind": "APIPolling",
+    "properties": {
+        "connectorUiConfig": {
+            "title": "M365 External Tenant (Polling CCP)",
+            "id":"M365_External",
+            "publisher": "Ken Ward",
+            "descriptionMarkdown": "<TBD>",
+            "graphQueriesTableName": "M365_AdvHunting_CL",
+            "graphQueries": [
+              {
+                "metricName": "Total data received",
+                "legend": "M365 Adv Hunting Events",
+                "baseQuery": "{{graphQueriesTableName}}"
+              }
+            ],
+            "sampleQueries": [
+              {
+                "description": "TBD",
+                "query": "{{graphQueriesTableName}}\n | take 10"
+              }
+            ],
+            "dataTypes": [
+              {
+                "name": "{{graphQueriesTableName}}",
+                "lastDataReceivedQuery": "{{graphQueriesTableName}}\n            | summarize Time = max(TimeGenerated)\n            | where isnotempty(Time)"
+              }
+            ],
+            "connectivityCriteria": [
+              {
+                "type": "SentinelKindsV2",
+                "value": [
+                  "APIPolling"
+                ]
+              }
+            ],
+            "availability": {
+              "status": 1,
+              "isPreview": false
+            },
+            "permissions": {
+              "resourceProvider": [
+                {
+                  "provider": "Microsoft.OperationalInsights/workspaces",
+                  "permissionsDisplayText": "read and write permissions are required.",
+                  "providerDisplayName": "Workspace",
+                  "scope": "Workspace",
+                  "requiredPermissions": {
+                    "action": true,
+                    "write": true,
+                    "read": true,
+                    "delete": true
+                  }
+                }
+              ]
+            },
+            "instructionSteps": [
+                {
+                    "title": "External M365 to Azure Sentinel",
+                    "description": "Enter Oauth2 app credentials. \n",
+                    "instructions": [
+                        {
+                            "parameters": {
+                                "enable": "true"
+                            },
+                            "type": "OAuth2"
+                        }
+                    ]
+                }
+            ]
+        },
+        "pollingConfig": {
+          "auth": {
+              "authType": "OAuth2",
+              "authorizationEndpoint": "https://login.microsoftonline.com/common/oauth2/v2.0/authorize",
+              "redirectionEndpoint": "https://portal.azure.com/TokenAuthorize",
+              "tokenEndpoint": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+              "authorizationEndpointQueryParameters": {},
+              "tokenEndpointHeaders": {
+                  "Accept": "application/json"
+              },
+              "TokenEndpointQueryParameters": {},
+              "isClientSecretInHeader": false,
+              "scope": "SecurityEvents.Read.All",
+              "grantType": "authorization_code",
+              "contentType": "application/x-www-form-urlencoded",
+              "FlowName": "AuthCode"
+          },
+            "request": {
+                "apiEndpoint": "https://api-us.securitycenter.windows.com/api/advancedhunting/run",
+                "rateLimitQPS": 2,
+                "httpMethod": "Post",
+                "queryParameters": "{'Query':'EmailEvents'}"
+                "queryTimeFormat": "yyyy-MM-ddTHH:mm:ssZ",
+                "retryCount": 3,
+                "queryWindowInMin": 5,
+                "timeoutInSeconds": 120,
+                "isPostPayloadJson": true
+              },
+              "response": {
+                "eventsJsonPaths": [
+                    "$"
+                ]
+            }
+    }
+}
+}
+],
+"outputs": {}
+}
