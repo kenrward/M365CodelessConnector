@@ -108,7 +108,7 @@
               },
               "TokenEndpointQueryParameters": {},
               "isClientSecretInHeader": false,
-              "scope": "SecurityEvents.Read.All",
+              "scope": "AdvancedQuery.Read.All",
               "grantType": "authorization_code",
               "contentType": "application/x-www-form-urlencoded",
               "FlowName": "AuthCode"
