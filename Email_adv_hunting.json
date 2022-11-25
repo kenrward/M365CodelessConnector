@@ -29,7 +29,7 @@
     "kind": "APIPolling",
     "properties": {
         "connectorUiConfig": {
-            "title": "M365 External Tenant (Polling CCP)",
+            "title": "M365 External Tenant -EmailEvents (Polling CCP)",
             "id":"M365_External",
             "publisher": "Ken Ward",
             "descriptionMarkdown": "<TBD>",
@@ -117,7 +117,7 @@
                 "apiEndpoint": "https://api-us.securitycenter.windows.com/api/advancedhunting/run",
                 "rateLimitQPS": 2,
                 "httpMethod": "Post",
-                "queryParameters": "{'Query':'EmailEvents'}"
+                "queryParameters": "{'Query':'EmailEvents'}",
                 "queryTimeFormat": "yyyy-MM-ddTHH:mm:ssZ",
                 "retryCount": 3,
                 "queryWindowInMin": 5,
