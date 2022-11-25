@@ -117,16 +117,15 @@
                 "apiEndpoint": "https://graph.microsoft.com/v1.0/security/alerts",
                 "rateLimitQPS": 2,
                 "httpMethod": "Get",
-                "queryParameters": "{'Query':'DeviceProcessEvents'}",
                 "queryTimeFormat": "yyyy-MM-ddTHH:mm:ssZ",
                 "retryCount": 3,
-                "queryWindowInMin": 10,
+                "queryWindowInMin": 5,
                 "timeoutInSeconds": 120,
                 "isPostPayloadJson": true
               },
               "response": {
                 "eventsJsonPaths": [
-                    "$.data"
+                    "$"
                 ]
             }
     }
