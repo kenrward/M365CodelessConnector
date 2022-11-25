@@ -29,11 +29,11 @@
     "kind": "APIPolling",
     "properties": {
         "connectorUiConfig": {
-            "title": "M365 External Tenant -EmailEvents (Polling CCP)",
-            "id":"M365_External",
+            "title": "M365 External Tenant - EmailEvents (Polling CCP)",
+            "id":"M365_Ext_EmailEvt",
             "publisher": "Ken Ward",
             "descriptionMarkdown": "<TBD>",
-            "graphQueriesTableName": "M365_AdvHunting_CL",
+            "graphQueriesTableName": "M365_AdvHunt_Email_CL",
             "graphQueries": [
               {
                 "metricName": "Total data received",
