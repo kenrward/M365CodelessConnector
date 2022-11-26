@@ -33,7 +33,7 @@
             "id":"M365_Ext_EmailEvt",
             "publisher": "Ken Ward",
             "descriptionMarkdown": "<TBD>",
-            "graphQueriesTableName": "M365_AdvHunt_Email_CL",
+            "graphQueriesTableName": "M365_AdvHuntEmail_CL",
             "graphQueries": [
               {
                 "metricName": "Total data received",
@@ -117,7 +117,7 @@
                 "apiEndpoint": "https://api-us.securitycenter.windows.com/api/advancedhunting/run",
                 "rateLimitQPS": 2,
                 "httpMethod": "Post",
-                "queryParameters": "{'Query':'EmailEvents'}",
+                "queryParametersTemplate": "{'Query':'EmailEvents'}",
                 "queryTimeFormat": "yyyy-MM-ddTHH:mm:ssZ",
                 "retryCount": 3,
                 "queryWindowInMin": 5,
