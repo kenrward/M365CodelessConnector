@@ -29,11 +29,11 @@
     "kind": "APIPolling",
     "properties": {
         "connectorUiConfig": {
-            "title": "M365 External Tenant (Polling CCP)",
-            "id":"M365_External",
+            "title": "M365 External Tenant - EmailEvents (Polling CCP)",
+            "id":"M365_Ext_EmailEvt",
             "publisher": "Ken Ward",
             "descriptionMarkdown": "<TBD>",
-            "graphQueriesTableName": "M365_AdvHunting_CL",
+            "graphQueriesTableName": "M365_AdvHuntEmail_CL",
             "graphQueries": [
               {
                 "metricName": "Total data received",
@@ -108,15 +108,16 @@
               },
               "TokenEndpointQueryParameters": {},
               "isClientSecretInHeader": false,
-              "scope": "SecurityEvents.Read.All",
+              "scope": "ThretHunting.Read.All",
               "grantType": "authorization_code",
               "contentType": "application/x-www-form-urlencoded",
               "FlowName": "AuthCode"
           },
             "request": {
-                "apiEndpoint": "https://graph.microsoft.com/v1.0/security/alerts",
+                "apiEndpoint": "https://api-us.securitycenter.windows.com/api/advancedhunting/run",
                 "rateLimitQPS": 2,
-                "httpMethod": "Get",
+                "httpMethod": "Post",
+                "queryParametersTemplate": "{'Query':'EmailEvents'}",
                 "queryTimeFormat": "yyyy-MM-ddTHH:mm:ssZ",
                 "retryCount": 3,
                 "queryWindowInMin": 5,
